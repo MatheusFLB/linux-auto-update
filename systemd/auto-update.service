@@ -1,0 +1,10 @@
+[Unit]
+Description=Automatic system update
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/auto-update.sh
+
+[Install]
+WantedBy=multi-user.target

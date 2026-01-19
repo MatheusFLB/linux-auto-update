@@ -1,46 +1,106 @@
-# linux-auto-update
-# UPDATE DE DEBIAN OU UBUNTU AUTOMÁTICO NA INICIALIZAÇÃO
-### crie o arquivo para o script
-```
-sudo nano /usr/local/bin/auto-update.sh
-```
-#### conteúdo que deve ser colado no arquivo do script
-```
-#!/bin/bash
-# Script de atualização automática
-apt update && apt full-upgrade -y && apt autoremove -y
-```
-### torne o script executável
-```
-sudo chmod +x /usr/local/bin/auto-update.sh
-```
-### crie um serviço para executar no boot
-```
-sudo nano /etc/systemd/system/auto-update.service
-```
-#### conteúdo que deve ser colado no arquivo do serviço
-```
-[Unit]
-Description=Atualização automática do sistema
-After=network-online.target
+# Linux Auto Update
 
-[Service]
-Type=oneshot
-ExecStart=/usr/local/bin/auto-update.sh
+Automate updates for your Debian/Ubuntu system with a simple script that runs automatically at boot and is scheduled to execute twice a day (07:00 and 19:00). It also allows for quick manual updates via the terminal.
 
-[Install]
-WantedBy=multi-user.target
+---
+
+# ✨ Key Features
+
+- Automatic updates twice a day via systemd timer
+- Automatic updates at system startup (boot)
+- Manual updates via `update` command
+- Simple and easy-to-maintain structure
+- No external dependencies other than systemd and apt
+
+---
+
+# 📦 Requirements
+
+- Debian or Ubuntu
+- sudo
+- git
+- systemd
+
+---
+
+# 🚀 Installation
+
+Make sure you have the required packages:
+
+```bash
+sudo apt update && sudo apt install -y sudo git
+````
+
+Clone the repository:
+
+```bash
+git clone https://github.com/MatheusFLB/linux-auto-update.git
+cd linux-auto-update
 ```
-### habilite o serviço
+
+Project structure:
+
 ```
-sudo systemctl daemon-reload
-sudo systemctl enable auto-update.service
+linux-auto-update/
+├── README.md
+├── linux-auto-update/
+│   ├── deploy.sh        # Full deployment script
+│   ├── update.sh        # System update script
+└── systemd/
+    ├── auto-update.service
+    └── auto-update.timer
 ```
-### reboot para testes
+
+Make the main script executable:
+
+```bash
+chmod +x linux-auto-update/deploy.sh
 ```
-sudo reboot
+
+Run the deploy script (execute as root):
+
+```bash
+sudo ./linux-auto-update/deploy.sh
 ```
-### verifique os logs após o reboot
+
+---
+
+# 🧠 How it Works
+
+* `update.sh` contains the commands to update the system (`apt update && apt full-upgrade -y && apt autoremove -y`).
+* The systemd service `auto-update.service` runs the update script once when triggered.
+* The systemd timer `auto-update.timer` schedules the service to run twice a day (07:00 and 19:00).
+* At system startup, the service runs automatically thanks to `WantedBy=multi-user.target`.
+* To update manually, simply type in the terminal:
+
+```bash
+update
 ```
-journalctl -u auto-update.service
-```
+
+(This command is an alias to run `/usr/local/bin/auto-update.sh` with sudo permissions.)
+
+---
+
+## 🔐 Security Notes
+
+* Runs as root via systemd, ensuring proper permissions.
+* No external data transfer or open ports.
+* Simple and transparent code, easy to audit.
+* Recommended for controlled environments to prevent unexpected updates.
+
+---
+
+## 🛠 Typical Use Cases
+
+| Use Case             | Description                                           |
+| -------------------- | ----------------------------------------------------- |
+| Servers              | Automated maintenance for Debian/Ubuntu servers       |
+| Desktop/Laptop       | Keep home or office machines always updated           |
+| Lab/Dev Environments | Safe, automated updates in test setups                |
+| VPS / Containers     | Minimal manual intervention for lightweight instances |
+
+---
+
+# 👤 Author
+
+Project created by **[Matheus Bissoli](https://www.linkedin.com/in/matheusbissoli/)** – simple and efficient automation to keep your Linux always updated.
