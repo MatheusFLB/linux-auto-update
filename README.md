@@ -1,10 +1,10 @@
-# Linux Auto Update
+# 🐧 Linux Auto Update 🔄
 
 Automate updates for your Debian/Ubuntu system with a simple script that runs automatically at boot and is scheduled to execute twice a day (07:00 and 19:00). It also allows for quick manual updates via the terminal.
 
 ---
 
-# ✨ Key Features
+## ✨ Key Features
 
 - Automatic updates twice a day via systemd timer
 - Automatic updates at system startup (boot)
@@ -14,7 +14,7 @@ Automate updates for your Debian/Ubuntu system with a simple script that runs au
 
 ---
 
-# 📦 Requirements
+## 📦 Requirements
 
 - Debian or Ubuntu
 - sudo
@@ -23,7 +23,7 @@ Automate updates for your Debian/Ubuntu system with a simple script that runs au
 
 ---
 
-# 🚀 Installation
+## 🚀 Installation
 
 Make sure you have the required packages:
 
@@ -44,11 +44,11 @@ Project structure:
 linux-auto-update/
 ├── README.md
 ├── linux-auto-update/
-│   ├── deploy.sh        # Full deployment script
-│   ├── update.sh        # System update script
+│   ├── deploy.sh               # Full deployment script
+│   ├── update.sh               # System update script
 └── systemd/
-    ├── auto-update.service
-    └── auto-update.timer
+    ├── auto-update.service     # Runs update.sh once when triggered on boot
+    └── auto-update.timer       # Schedules auto-update.service twice daily (07:00 & 19:00)
 ```
 
 Make the main script executable:
@@ -65,7 +65,7 @@ sudo ./linux-auto-update/deploy.sh
 
 ---
 
-# 🧠 How it Works
+## 🧠 How it Works
 
 * `update.sh` contains the commands to update the system (`apt update && apt full-upgrade -y && apt autoremove -y`).
 * The systemd service `auto-update.service` runs the update script once when triggered.
