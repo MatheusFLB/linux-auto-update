@@ -3,6 +3,7 @@
 Automate updates for your Debian/Ubuntu system with a simple script that runs automatically at boot and is scheduled to execute twice a day (07:00 and 19:00). It also allows for quick manual updates via the terminal.
 
 ---
+---
 
 ## ✨ Key Features
 
@@ -13,6 +14,7 @@ Automate updates for your Debian/Ubuntu system with a simple script that runs au
 - No external dependencies other than systemd and apt
 
 ---
+---
 
 ## 📦 Requirements
 
@@ -22,13 +24,14 @@ Automate updates for your Debian/Ubuntu system with a simple script that runs au
 - systemd
 
 ---
+---
 
 ## 🚀 Installation
 
 Make sure you have the required packages:
 
 ```bash
-sudo apt update && sudo apt install -y sudo git
+sudo apt update && sudo apt install -y git
 ````
 
 Clone the repository:
@@ -64,6 +67,7 @@ sudo ./linux-auto-update/deploy.sh
 ```
 
 ---
+---
 
 ## 🧠 How it Works
 
@@ -80,6 +84,7 @@ update
 (This command is an alias to run `/usr/local/bin/auto-update.sh` with sudo permissions.)
 
 ---
+---
 
 ## 🔐 Security Notes
 
@@ -88,6 +93,7 @@ update
 * Simple and transparent code, easy to audit.
 * Recommended for controlled environments to prevent unexpected updates.
 
+---
 ---
 
 ## 🛠 Typical Use Cases
@@ -99,6 +105,7 @@ update
 | Lab/Dev Environments | Safe, automated updates in test setups                |
 | VPS / Containers     | Minimal manual intervention for lightweight instances |
 
+---
 ---
 
 # 👤 Author
